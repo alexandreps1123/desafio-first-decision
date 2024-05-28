@@ -1,0 +1,17 @@
+.btn-size {
+    width: 100%;
+}
+
+.center-radio {
+    top: 50%;
+    position: inherit;
+    align-items: center;
+    align-content: center;
+}
+
+label {
+    /* color: white; */
+    font-size: 14px;
+    margin-top: 4px;
+    padding: 4px;
+}
