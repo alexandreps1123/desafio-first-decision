@@ -6,10 +6,10 @@
     <div class="row" style="padding-bottom: 16px;">
         <div class="col-sm-5">
             <form>
-                <input id="table-filtering-search" class="form-control" type="text"
-                    placeholder="Pesquise pelo nome ou email &#61447;"
-                    style="font-family: FontAwesome, Arial; font-style: normal"
-                    [formControl]="filter"/>
+                <input id="table-filtering-search" class="form-control fa-search" type="text"
+                    placeholder="Pesquise pelo nome ou email &#xf002;"
+                    style="font-family:Arial, FontAwesome"
+                    [formControl]="filter">
             </form>
         </div>
         <div class="col-sm-2">
@@ -92,7 +92,7 @@
                 </pagination-template>
             </div>
 
-            <div class="col" style="align-self: flex-end;">
+            <div class="col" style="float: right;">
                 <select [(ngModel)]="config.itemsPerPage" class="form-select" aria-label=".form-select-sm example" name="cars" id="cars">
                     <option *ngFor="let quant of itemsPerPage" [value]="quant">{{quant}} itens por página</option>
                 </select>
