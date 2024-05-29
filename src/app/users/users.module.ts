@@ -9,6 +9,7 @@ import { ToastModule } from 'primeng/toast';
 import { UsersFormComponent } from './users-form/users-form.component';
 import { UsersComponent } from './users.component';
 import { ChipsModule } from 'primeng/chips';
+import { InputMaskModule } from 'primeng/inputmask';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ChipsModule } from 'primeng/chips';
     FormsModule,
     ReactiveFormsModule,
     ToastModule,
-    ChipsModule
+    ChipsModule,
+    InputMaskModule
   ],
   providers: [
     MessageService

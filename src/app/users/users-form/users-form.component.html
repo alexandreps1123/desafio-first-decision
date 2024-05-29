@@ -33,12 +33,17 @@
     </div>
     <div class="row">
       <!-- telefone -->
-      <div class="col">
+      <div class="col flex-auto">
         <label for="telefone">Telefone
           <span style="color: gray;"><i> - Opcional</i></span>
         </label>
-        <input type="text" id="telefone" class="form-control" 
-          formControlName="telefone" placeholder="Digite o telefone">
+
+        <!-- <div style="padding: 10px 10px 10px 10px;"> -->
+          <p-inputMask 
+            mask="(99) 99999-9999" 
+            formControlName="telefone"
+            placeholder="(99) 99999-9999" />
+        <!-- </div> -->
       </div>
       <!-- email -->
       <div class="col">
@@ -55,12 +60,12 @@
     <div class="row">
       <div class="col">
         <label for="perfil">Perfil de Acesso</label>
-        <div class="p-fluid" style="padding-top: 3px; padding-bottom: 3px;">
+        <div class="p-fluid">
           <p-chips formControlName="perfilAcesso" variant="filled" placeholder="Informe o perfil de acesso"/>
-        </div>
-        <div *ngIf="novoUsuarioForm.get('perfilAcesso')?.touched && 
-                      novoUsuarioForm.get('perfilAcesso')?.invalid">
-          <small class="text-danger d-block mt-2">Perfil de acesso é obrigatório</small>
+          <div *ngIf="novoUsuarioForm.get('perfilAcesso')?.touched && 
+              novoUsuarioForm.get('perfilAcesso')?.invalid">
+            <small class="text-danger d-block">Perfil de acesso é obrigatório</small>
+          </div>
         </div>
       </div>
     </div>
