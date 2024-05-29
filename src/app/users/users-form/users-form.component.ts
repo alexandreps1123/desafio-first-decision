@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, TemplateRef } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MessageService } from 'primeng/api';
 import { Observable, OperatorFunction } from 'rxjs';
@@ -44,7 +44,7 @@ export class UsersFormComponent implements OnInit {
       'nome': new FormControl('', Validators.required ),
       'sobrenome': new FormControl('', Validators.required ),
       'telefone': new FormControl(''),
-      'email': new FormControl('', [ Validators.required, Validators.email ]),
+      'email': new FormControl('', [ Validators.required, this.emailValidator.bind(this) ]),
       'perfilAcesso': new FormArray([]),
       'idioma': new FormControl('', Validators.required ),
       'tipoContato': new FormControl(TipoContato.TODOS),
@@ -65,10 +65,10 @@ export class UsersFormComponent implements OnInit {
     console.log(this.novoUsuarioForm);
     if(this.isValidForm()) {
       // mensagem de sucesso
-      // this.messageService.add({ severity: 'success', summary: 'Cadastro de Usuário!', 
-      //   detail: 'Operação realizada com sucesso!', key: 'br', life: 5000 });
+      this.messageService.add({ severity: 'success', summary: 'Cadastro de Usuário!', 
+        detail: 'Operação realizada com sucesso!', key: 'br', life: 5000 });
   
-      //   this.activeModal.close('Close click');
+        this.activeModal.close('Close click');
       console.log("valid")
 
     }
@@ -105,6 +105,19 @@ export class UsersFormComponent implements OnInit {
   private isValidForm() {
     this.novoUsuarioForm.markAllAsTouched();
     return this.novoUsuarioForm.valid;
+  }
+
+  // custom validation email
+  private emailValidator(email: FormControl): { [s: string]: boolean } | null {
+    // https://stackoverflow.com/a/46370978
+    const regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+    let emailValid = regexp.exec(email.value);
+    if(!emailValid) {
+      return { 'validEmail': true };
+    }
+
+    return null;
   }
 }
 

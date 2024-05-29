@@ -43,11 +43,11 @@
       <!-- email -->
       <div class="col">
         <label for="email">E-mail corporativo</label>
-        <input type="email" id="email" class="form-control" 
-          formControleName="email" placeholder="fulano@email.com">
+        <input type="text" id="email" class="form-control" 
+          formControlName="email" placeholder="fulano@email.com">
         <div *ngIf="novoUsuarioForm.get('email')?.touched && 
                       novoUsuarioForm.get('email')?.invalid">
-          <small class="text-danger d-block mt-2">E-mail é obrigatório</small>
+          <small class="text-danger d-block mt-2">Informe um e-mail válido</small>
         </div>
       </div>
     </div>
