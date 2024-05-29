@@ -675,11 +675,14 @@ export class UsersComponent implements OnInit {
 	filter: string = '';
   private modalService = inject(NgbModal);
 
-  constructor(config: NgbModalConfig) { }
+  constructor(config: NgbModalConfig) { 
+    config.backdrop = 'static';
+		config.keyboard = false;
+  }
 
   ngOnInit() {
 
-   }
+  }
 
   open(): NgbModalRef {
     return this.modalService.open(UsersFormComponent, { size: 'lg' });

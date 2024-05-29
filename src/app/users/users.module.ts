@@ -6,13 +6,15 @@ import { NgbModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersFormComponent } from './users-form/users-form.component';
 import { TagModule } from 'primeng/tag';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 
 
 @NgModule({
   declarations: [
     UsersComponent,
-    UsersFormComponent
+    UsersFormComponent,
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgbModule,
     TagModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastModule
+  ],
+  providers: [
+    MessageService
   ]
+  
 })
 export class UsersModule { }
