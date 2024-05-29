@@ -8,6 +8,7 @@ import { TagModule } from 'primeng/tag';
 import { ToastModule } from 'primeng/toast';
 import { UsersFormComponent } from './users-form/users-form.component';
 import { UsersComponent } from './users.component';
+import { ChipsModule } from 'primeng/chips';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { UsersComponent } from './users.component';
     TagModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastModule
+    ToastModule,
+    ChipsModule
   ],
   providers: [
     MessageService

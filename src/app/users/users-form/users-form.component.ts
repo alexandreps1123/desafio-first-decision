@@ -47,17 +47,18 @@ export class UsersFormComponent implements OnInit {
 
   save() {
     if (this.isValidForm()) {
+      // console.log(this.novoUsuarioForm.value);
       this.service.saveUser(this.novoUsuarioForm.value);
       // mensagem de sucesso
       this.messageService.add({
         severity: 'success', summary: 'Cadastro de Usuário!',
         detail: 'Operação realizada com sucesso!', key: 'br', life: 5000
       });
-
+      
+      // close modal after save
+      this.activeModal.close('Close click');
     }
 
-    // close modal after save
-    this.activeModal.close('Close click');
   }
 
   // to search in idioma list

@@ -55,8 +55,9 @@
     <div class="row">
       <div class="col">
         <label for="perfil">Perfil de Acesso</label>
-        <input type="text" id="perfil" class="form-control" 
-          formControlName="perfilAcesso" placeholder="Digite o nome">
+        <div class="p-fluid" style="padding-top: 3px; padding-bottom: 3px;">
+          <p-chips formControlName="perfilAcesso" variant="filled" placeholder="Informe o perfil de acesso"/>
+        </div>
         <div *ngIf="novoUsuarioForm.get('perfilAcesso')?.touched && 
                       novoUsuarioForm.get('perfilAcesso')?.invalid">
           <small class="text-danger d-block mt-2">Perfil de acesso é obrigatório</small>
@@ -69,10 +70,12 @@
         <label for="idioma">Idioma</label>
         <input id="typeahead-basic" type="text" class="form-control" [ngbTypeahead]="searchIdioma"
           formControlName="idioma" placeholder="Informe um idioma"/>
-          <div *ngIf="novoUsuarioForm.get('idioma')?.touched && 
+        
+        <div *ngIf="novoUsuarioForm.get('idioma')?.touched && 
                       novoUsuarioForm.get('idioma')?.invalid">
           <small class="text-danger d-block mt-2">Idioma é obrigatório</small>
         </div>
+
       </div>
       <div class="col">
         <label for="tipo-contato">Contato preferencial

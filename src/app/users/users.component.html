@@ -15,7 +15,7 @@
         <div class="col-sm-2">
             <form>
                 <select [formControl]="filterOption" class="form-select" aria-label=".form-select-sm example" name="cars" id="cars">
-                    <option value="" disabled selected hidden>Filtrar</option>
+                    <option value="" selected>Filtrar</option>
                     <option *ngFor="let status of optionFilter" [value]="status">{{ status }}</option>
                 </select>
             </form>
