@@ -1,7 +1,11 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, inject, OnInit, TemplateRef } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MessageService } from 'primeng/api';
 import { Observable, OperatorFunction } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { Status } from 'src/app/enums/status.enum';
+import { TipoContato } from 'src/app/enums/tipoContato.enum';
 
 
 @Component({
@@ -34,12 +38,40 @@ export class UsersFormComponent implements OnInit {
     "Turco TR"
   ]
 
+  // formulário
+  novoUsuarioForm = new FormGroup(
+    {
+      'nome': new FormControl('', Validators.required ),
+      'sobrenome': new FormControl('', Validators.required ),
+      'telefone': new FormControl(''),
+      'email': new FormControl('', [ Validators.required, Validators.email ]),
+      'perfilAcesso': new FormArray([]),
+      'idioma': new FormControl('', Validators.required ),
+      'tipoContato': new FormControl(TipoContato.TODOS),
+      'status': new FormControl(Status.PENDENTE),
+      'dataCriacao': new FormControl(new Date()),
+      'ultimoAcesso': new FormControl(null),
+    }
+  );
+  
   activeModal = inject(NgbActiveModal);
   
-  constructor() {}
+  constructor(private messageService: MessageService) { }
 
   ngOnInit() {
+  }
 
+  save() {
+    console.log(this.novoUsuarioForm);
+    if(this.isValidForm()) {
+      // mensagem de sucesso
+      // this.messageService.add({ severity: 'success', summary: 'Cadastro de Usuário!', 
+      //   detail: 'Operação realizada com sucesso!', key: 'br', life: 5000 });
+  
+      //   this.activeModal.close('Close click');
+      console.log("valid")
+
+    }
   }
 
   search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
@@ -50,6 +82,29 @@ export class UsersFormComponent implements OnInit {
 				term.length < 1 ? [] : this.idiomas.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
 			),
 		);
-  
+ 
+
+  private modalService = inject(NgbModal);
+	closeResult = '';
+
+	open(content: TemplateRef<any>) {
+		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+			(result) => {
+				this.closeResult = `Closed with: ${result}`;
+			},
+			(reason) => {
+				this.closeResult = `Dismissed ${reason}`;
+			},
+		);
+	}
+
+  closeAll() {
+    this.modalService.dismissAll();
+  }
+
+  private isValidForm() {
+    this.novoUsuarioForm.markAllAsTouched();
+    return this.novoUsuarioForm.valid;
+  }
 }
 

@@ -3,16 +3,16 @@ import { TipoContato } from "../enums/tipoContato.enum";
 
 export interface User {
     id?: number;
-    nome?: string;
-    sobrenome?: string;
+    nome: string;
+    sobrenome: string;
     telefone?: string;
-    email?: string;
+    email: string;
     perfilAcesso?: string[];
     idioma?: string;
     tipoContato?: TipoContato;
-    status?: Status;
+    status: Status;
     dataCriacao?: Date;
-    ultimoAcesso?: Date;
+    ultimoAcesso?: Date | null;
 }
 
 export type Users = Array<User>;

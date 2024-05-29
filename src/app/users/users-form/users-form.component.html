@@ -1,77 +1,124 @@
 <div class="modal-header">
   <div>
     <h4 class="modal-title" id="modal-basic-title">Adicionar usuário</h4>
-    <p style="color: gray;">Aqui você adiciona e configura os usuários que fazem parte da sua equipe</p>
+    <p style="color: gray;">
+      Aqui você adiciona e configura os usuários que fazem parte da sua equipe
+    </p>
   </div>
-  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+  <button type="button" class="btn-close" aria-label="Close" (click)="open(confirmActionModal)"></button>
 </div>
 <div class="modal-body">
-  <!-- row 1 -->
-  <div class="row">
-    <div class="col">
-      <label for="nome" class="label">Nome</label>
-      <input type="text" id="nome" class="form-control" placeholder="Digite o nome">
-    </div>
-    <div class="col">
-      <label for="sobrenome">Sobrenome</label>
-      <input type="text" id="sobrenome" class="form-control" placeholder="Digite o sobrenome">
-    </div>
-  </div>
-  <!-- row 2 -->
-  <div class="row">
-    <div class="col">
-      <label for="telefone">Telefone
-        <span style="color: gray;"><i> - Opcional</i></span>
-      </label>
-      <input type="text" id="telefone" class="form-control" placeholder="Digite o nome">
-    </div>
-    <div class="col">
-      <label for="email">E-mail corporativo</label>
-      <input type="email" id="email" class="form-control" placeholder="fulano@email.com">
-    </div>
-  </div>
-  <!-- row 3 -->
-  <div class="row">
-    <div class="col">
-      <label for="perfil">Perfil de Acesso</label>
-      <input type="text" id="perfil" class="form-control" placeholder="Digite o nome">
-    </div>
-  </div>
-  <!-- row 4 -->
-  <div class="row">
-    <div class="col">
-      <label for="idioma">Idioma</label>
-      <input id="typeahead-basic" type="text" class="form-control" [ngbTypeahead]="search"/>
-      <!-- <input type="text" id="nome" class="form-control" placeholder="Digite o nome"> -->
-    </div>
-    <div class="col">
-      <label for="tipo-contato">Contato preferencial
-        <span style="color: gray;"><i> - Opcional</i></span>
-      </label>
-      <br>
-      <div style="margin-left: -20px;justify-content: end;">
-        <div class="form-check form-check-inline">
-          <input type="radio" id="email" name="tipo-contato" value="EMAIL">
-          <label for="email" style="font-size: 16px;">E-mail</label><br>
-        </div>
-        <div class="form-check form-check-inline">
-          <input type="radio" id="telefone" name="tipo-contato" value="TELEFONE">
-          <label for="telefone" style="font-size: 16px;">Telefone</label><br>
-        </div>
-        <div class="form-check form-check-inline">
-          <input type="radio" id="todos" name="tipo-contato" value="TODOS">
-          <label for="todos" style="font-size: 16px;">Todos</label>
+  <form [formGroup]="novoUsuarioForm" (ngSubmit)="save()">
+    <div class="row">
+      <!-- nome -->
+      <div class="col">
+        <label for="nome" class="label">Nome</label>
+        <input type="text" id="nome" class="form-control" 
+          formControlName="nome" placeholder="Digite o nome">
+          <div *ngIf="novoUsuarioForm.get('nome')?.touched && 
+                      novoUsuarioForm.get('nome')?.invalid">
+            <small class="text-danger d-block mt-2">Nome é obrigatório</small>
+          </div>
+      </div>
+      <!-- sobrenome -->
+      <div class="col">
+        <label for="sobrenome">Sobrenome</label>
+        <input type="text" id="sobrenome" class="form-control" 
+          formControlName="sobrenome"  placeholder="Digite o sobrenome">
+        <div *ngIf="novoUsuarioForm.get('sobrenome')?.touched && 
+                      novoUsuarioForm.get('sobrenome')?.invalid">
+          <small class="text-danger d-block mt-2">Sobrenome é obrigatório</small>
         </div>
       </div>
     </div>
-  </div>
+    <div class="row">
+      <!-- telefone -->
+      <div class="col">
+        <label for="telefone">Telefone
+          <span style="color: gray;"><i> - Opcional</i></span>
+        </label>
+        <input type="text" id="telefone" class="form-control" 
+          formControlName="telefone" placeholder="Digite o telefone">
+      </div>
+      <!-- email -->
+      <div class="col">
+        <label for="email">E-mail corporativo</label>
+        <input type="email" id="email" class="form-control" 
+          formControleName="email" placeholder="fulano@email.com">
+        <div *ngIf="novoUsuarioForm.get('email')?.touched && 
+                      novoUsuarioForm.get('email')?.invalid">
+          <small class="text-danger d-block mt-2">E-mail é obrigatório</small>
+        </div>
+      </div>
+    </div>
+    <!-- row 3 -->
+    <div class="row">
+      <div class="col">
+        <label for="perfil">Perfil de Acesso</label>
+        <input type="text" id="perfil" class="form-control" 
+          formControlName="perfilAcesso" placeholder="Digite o nome">
+        <div *ngIf="novoUsuarioForm.get('perfilAcesso')?.touched && 
+                      novoUsuarioForm.get('perfilAcesso')?.invalid">
+          <small class="text-danger d-block mt-2">Perfil de acesso é obrigatório</small>
+        </div>
+      </div>
+    </div>
+    <!-- row 4 -->
+    <div class="row">
+      <div class="col">
+        <label for="idioma">Idioma</label>
+        <input id="typeahead-basic" type="text" class="form-control" [ngbTypeahead]="search"
+          formControlName="idioma" placeholder="Informe um idioma"/>
+          <div *ngIf="novoUsuarioForm.get('idioma')?.touched && 
+                      novoUsuarioForm.get('idioma')?.invalid">
+          <small class="text-danger d-block mt-2">Idioma é obrigatório</small>
+        </div>
+      </div>
+      <div class="col">
+        <label for="tipo-contato">Contato preferencial
+          <span style="color: gray;"><i> - Opcional</i></span>
+        </label>
+        <br>
+        <div style="margin-left: -20px;justify-content: end;">
+          <div class="form-check form-check-inline">
+            <input type="radio" name="tipoContato" value="EMAIL"
+              formControlName="tipoContato">
+            <label for="tipoContato" style="font-size: 16px;">E-mail</label><br>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="tipoContato" value="TELEFONE"
+              formControlName="tipoContato">
+            <label for="tipoContato" style="font-size: 16px;">Telefone</label><br>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" name="tipoContato" value="TODOS"
+              formControlName="tipoContato">
+            <label for="tipoContato" style="font-size: 16px;">Todos</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- botoes -->
+    <div class="row" style="padding-top: 24px;">
+      <div class="col">
+        <button type="button" class="btn btn-size" style="color: blue;" (click)="open(confirmActionModal)">Fechar</button>
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-primary btn-size">
+          Enviar convite
+        </button>
+      </div>
+    </div>
+  </form>
 </div>
-<div class="modal-footer">
-  <div class="col">
-    <button type="button" class="btn btn-size" style="color: blue;" (click)="activeModal.close('Close click')">Fechar</button>
+
+<ng-template #confirmActionModal let-modal>
+	<div class="modal-body">
+		<h5>Deseja sair sem Salvar?</h5>
+	</div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="closeAll()">Sim</button>
+    <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Não</button>
   </div>
-  <div class="col">
-    <button type="button" class="btn btn-primary btn-size" (click)="activeModal.close('Close click')">Enviar
-      convite</button>
-  </div>
-</div>
+</ng-template>
