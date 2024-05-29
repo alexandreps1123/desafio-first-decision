@@ -1,5 +1,5 @@
 export enum Status {
-    ATIVO = 1,
-    PENDENTE = 2,
-    BLOQUEADO = 3,
+    ATIVO = "Ativo",
+    PENDENTE = "Pendente",
+    BLOQUEADO = "Bloqueado",
 }
