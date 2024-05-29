@@ -67,7 +67,7 @@
     <div class="row">
       <div class="col">
         <label for="idioma">Idioma</label>
-        <input id="typeahead-basic" type="text" class="form-control" [ngbTypeahead]="search"
+        <input id="typeahead-basic" type="text" class="form-control" [ngbTypeahead]="searchIdioma"
           formControlName="idioma" placeholder="Informe um idioma"/>
           <div *ngIf="novoUsuarioForm.get('idioma')?.touched && 
                       novoUsuarioForm.get('idioma')?.invalid">
