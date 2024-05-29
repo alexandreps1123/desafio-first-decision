@@ -81,6 +81,10 @@ export class UsersFormComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
+  isValidField(filedName: string): boolean | undefined{
+    return this.novoUsuarioForm.get(filedName)?.touched && this.novoUsuarioForm.get(filedName)?.invalid
+  }
+
   private loadIdiomas() {
     this.service.getIdiomas().subscribe({
       next: value => {

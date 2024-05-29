@@ -15,8 +15,7 @@
         <label for="nome" class="label">Nome</label>
         <input type="text" id="nome" class="form-control" 
           formControlName="nome" placeholder="Digite o nome">
-          <div *ngIf="novoUsuarioForm.get('nome')?.touched && 
-                      novoUsuarioForm.get('nome')?.invalid">
+          <div *ngIf="isValidField('nome')">
             <small class="text-danger d-block mt-2">Nome é obrigatório</small>
           </div>
       </div>
@@ -25,8 +24,7 @@
         <label for="sobrenome">Sobrenome</label>
         <input type="text" id="sobrenome" class="form-control" 
           formControlName="sobrenome"  placeholder="Digite o sobrenome">
-        <div *ngIf="novoUsuarioForm.get('sobrenome')?.touched && 
-                      novoUsuarioForm.get('sobrenome')?.invalid">
+        <div *ngIf="isValidField('sobrenome')">
           <small class="text-danger d-block mt-2">Sobrenome é obrigatório</small>
         </div>
       </div>
@@ -50,8 +48,7 @@
         <label for="email">E-mail corporativo</label>
         <input type="text" id="email" class="form-control" 
           formControlName="email" placeholder="fulano@email.com">
-        <div *ngIf="novoUsuarioForm.get('email')?.touched && 
-                      novoUsuarioForm.get('email')?.invalid">
+        <div *ngIf="isValidField('email')">
           <small class="text-danger d-block mt-2">Informe um e-mail válido</small>
         </div>
       </div>
@@ -62,8 +59,7 @@
         <label for="perfil">Perfil de Acesso</label>
         <div class="p-fluid">
           <p-chips formControlName="perfilAcesso" variant="filled" placeholder="Informe o perfil de acesso"/>
-          <div *ngIf="novoUsuarioForm.get('perfilAcesso')?.touched && 
-              novoUsuarioForm.get('perfilAcesso')?.invalid">
+          <div *ngIf="isValidField('perfilAcesso')">
             <small class="text-danger d-block">Perfil de acesso é obrigatório</small>
           </div>
         </div>
@@ -76,8 +72,7 @@
         <input id="typeahead-basic" type="text" class="form-control" [ngbTypeahead]="searchIdioma"
           formControlName="idioma" placeholder="Informe um idioma"/>
         
-        <div *ngIf="novoUsuarioForm.get('idioma')?.touched && 
-                      novoUsuarioForm.get('idioma')?.invalid">
+        <div *ngIf="isValidField('idioma')">
           <small class="text-danger d-block mt-2">Idioma é obrigatório</small>
         </div>
 
