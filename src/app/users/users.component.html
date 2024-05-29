@@ -4,11 +4,20 @@
     <h2>Usuários</h2>
 
     <div class="row" style="padding-bottom: 16px;">
-        <div class="col-sm-4">
+        <div class="col-sm-5">
             <form>
                 <input id="table-filtering-search" class="form-control" type="text"
                     placeholder="Pesquise pelo nome ou email &#61447;"
-                    style="font-family: FontAwesome, Arial; font-style: normal"/>
+                    style="font-family: FontAwesome, Arial; font-style: normal"
+                    [formControl]="filter"/>
+            </form>
+        </div>
+        <div class="col-sm-2">
+            <form>
+                <select [formControl]="filterOption" class="form-select" aria-label=".form-select-sm example" name="cars" id="cars">
+                    <option value="" disabled selected hidden>Filtrar</option>
+                    <option *ngFor="let status of optionFilter" [value]="status">{{ status }}</option>
+                </select>
             </form>
         </div>
 

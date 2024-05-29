@@ -5,6 +5,8 @@ import { Status } from '../enums/status.enum';
 import { Users } from '../models/user.model';
 import { UsersService } from '../service/users.service';
 import { UsersFormComponent } from './users-form/users-form.component';
+import { FormControl } from '@angular/forms';
+import { startWith, map } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -16,22 +18,38 @@ export class UsersComponent implements OnInit {
   listaUsuarios: Users = [];
 
   itemsPerPage: number[] = [10, 20, 50];
+  optionFilter: string[] = [Status.ATIVO, Status.BLOQUEADO, Status.PENDENTE];
 
   config: PaginationInstance = {
     itemsPerPage: 10,
     currentPage: 1
   };
 
-	filter: string = '';
+	filter = new FormControl('');
+  filterOption = new FormControl('');
+  
   private modalService = inject(NgbModal);
 
   constructor(config: NgbModalConfig, private service: UsersService) { 
     config.backdrop = 'static';
 		config.keyboard = false;
+
+    this.filter.valueChanges.pipe(
+      startWith(''),
+      map((text) => this.service.searchUserByInputText(text))).subscribe({
+        next: value => this.listaUsuarios = value
+      });
+        
+    this.filterOption.valueChanges.pipe(
+      startWith(''),
+      map((text) => this.service.searchUserByOption(text))).subscribe({
+        next: value => this.listaUsuarios = value
+      });
+
   }
 
   ngOnInit() {
-    this.loadUsersList()  ;
+    this.loadUsersList();
   }
 
   open(): NgbModalRef {

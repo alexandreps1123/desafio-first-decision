@@ -19,6 +19,30 @@ export class UsersService {
     return of(this.idiomas);
   }
 
+  searchUserByInputText(text: string | null): Users {
+    return this.listaUsuarios.filter((usuario) => {
+      if (!text) return this.listaUsuarios
+      
+      const term = text.toLowerCase();
+      return (
+        usuario.nome.toLowerCase().includes(term) ||
+        usuario.sobrenome.toLowerCase().includes(term) ||
+        usuario.email.toLowerCase().includes(term)
+      );
+    });
+  }
+
+  searchUserByOption(text: string | null): Users {
+    return this.listaUsuarios.filter((usuario) => {
+      if (!text) return this.listaUsuarios
+
+      const term = text.toLowerCase();
+      return (
+        usuario.status.toLowerCase().includes(term)
+      );
+    });
+  }
+
   saveUser(user: User): void {
     this.listaUsuarios.push(user);
 
